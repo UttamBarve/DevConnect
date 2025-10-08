@@ -1,0 +1,22 @@
+{
+  "name": "devconnnect-backend",
+  "version": "1.0.0",
+  "description": "Connects Like-Minded Developers To Build Projects and Share Experience ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "keywords": [
+    "Nodejs",
+    "JavaScript",
+    "Express",
+    "MongoDB",
+    "DevConnect"
+  ],
+  "author": "Uttam Barve",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
