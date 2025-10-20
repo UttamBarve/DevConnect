@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const connectDB = async () => {
-    await mongoose.connect("mongodb+srv://uttambarve:pass123@devconnect.t1tkocb.mongodb.net/DevConnect");
+    await mongoose.connect(import.meta.env.MONGODB_URI);
 
 }
 
