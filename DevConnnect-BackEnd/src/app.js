@@ -1,23 +1,35 @@
-const express = require('express');
-
+const express = require("express");
+const connectDB = require("./config/database");
 const app = express();
+const User = require("./models/user");
 
 
+app.post("/api/v0/signup", (req, res)=>{
+    const user = User({
+      firstName: "Kundan",
+      lastName: "Dhangar",
+      emailId: "KD@gmail.com",
+      password: "+gar",
+      age: 20,
+      gender: "Male"
+    })
 
-app.use('/test', (req,res)=>{
-    res.send("THIS IS TESTING PAGE");
-});
+    user.save();
 
-app.use("/admin", (req,res)=>{
-    res.send("THIS IS ADMIN DASHBOARD");
-});
-
-app.use('/', (req,res)=>{
-    res.send("THIS IS DASHBOARD");
-});
-
-
-app.listen(2511, (req,res)=>{
-    console.log("listening to server");
-    
+    res.send("User Created!")
 })
+
+
+
+
+//listening...
+connectDB()
+  .then(() => {
+    console.log("Database connected successfully");
+    app.listen(2511, (req, res) => {
+      console.log("listening to server");
+    });
+  })
+  .catch((err) => {
+    console.error("An Error Occured");
+  });
