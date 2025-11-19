@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Connects Like-Minded Developers To Build Projects and Share Experience ",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js"
@@ -17,6 +18,8 @@
   "author": "Uttam Barve",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "mongoose": "^8.19.1"
   }
