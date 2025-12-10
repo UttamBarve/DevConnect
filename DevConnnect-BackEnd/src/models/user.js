@@ -68,7 +68,18 @@ const userSchema = new mongoose.Schema({
         throw new Error("only 10 skills");
       }
     }
+  },
+  
+  otp: {
+    type: Number,
+  },
+
+  otpExpiry:{
+    type: Date
   }
+
+
+  
 }, {
     timestamps: true
 });

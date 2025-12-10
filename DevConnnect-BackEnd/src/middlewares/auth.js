@@ -8,7 +8,7 @@ const userAuth = async (req,res,next) => {
     try{
         const { token } = req.cookies
     if(!token){
-        throw new Error("Invalid token!!!");
+        throw new Error("Redirect to login");
     }
     const {userId} = verify(token, process.env.SECRETKEY);
     const user = await User.findById(userId);
@@ -16,7 +16,7 @@ const userAuth = async (req,res,next) => {
     if(!user){
         throw new Error("User Not Found");
     }
-    req.body.user = user; 
+    req.user = user; 
     next();
     } catch(err){
         res.status(400).send("Validation ERROR: " + err.message);
