@@ -147,11 +147,25 @@ const passwordValidation = (
   );
 };
 
+const requestSendValidation = (status) => {
+  if (status != "ignored" && status != "interested" ) {
+    throw new Error(`Enter Valid Status Type:"${status}",\nStatus type can only be "interested" or "ignored"`);
+  }
+};
+
+const requestReviewValidation = (status) => {
+  if (status != "accepted" && status != "rejected" ) {
+    throw new Error(`Enter Valid Status Type:"${status}",\nStatus type can only be "accepted" or "rejected"`);
+  }
+};
+
 module.exports = {
   signupValidation,
   signupSentisation,
   loginSentisation,
   loginValidation,
   editProfileSentisation,
-  passwordValidation
+  passwordValidation,
+  requestSendValidation,
+  requestReviewValidation
 };

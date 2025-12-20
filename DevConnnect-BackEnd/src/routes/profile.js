@@ -74,7 +74,7 @@ profileRouter.post(
     try {
       const email = req.body.email;
       const user = await User.findOne({ email: email });
-      console.log(user);
+      
       if (!user) {
         throw new Error("User Not Exists!");
       }
@@ -98,13 +98,12 @@ profileRouter.post(
   }
 );
 
-profileRouter.patch(
-  "/api/v0/profile/forgotPassword/verifyOTP",
+profileRouter.patch("/api/v0/profile/forgotPassword/verifyOTP",
   async (req, res) => {
     try {
       const email = req.body.email;
       const otpInput = req.body.otp;
-      const newPassword = req.body.password;
+      const newPassword = req.body.newPassword;
       const user = await User.findOne({ email: email });
 
       if (!passwordValidation(newPassword)) {

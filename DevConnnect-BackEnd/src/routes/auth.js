@@ -37,7 +37,7 @@ authRouter.post("/api/v0/signup", async (req, res) => {
 
     // Save User Data
     // creating user document
-    const user = User({
+    const user = new User({
       firstName,
       lastName,
       email,

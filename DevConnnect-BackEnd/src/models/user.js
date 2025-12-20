@@ -77,8 +77,6 @@ const userSchema = new mongoose.Schema({
   otpExpiry:{
     type: Date
   }
-
-
   
 }, {
     timestamps: true
@@ -90,7 +88,7 @@ userSchema.methods.getJWT = function(){
 }
 
 userSchema.methods.verifyJWT = function(token){
-  const cookieData = jwt.verify(token, process.env.SECRETKEY);
+  const cookieData = verify(token, process.env.SECRETKEY);
   return cookieData;
   
 }

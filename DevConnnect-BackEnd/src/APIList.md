@@ -3,28 +3,27 @@ Done-> POST /signup
 Done-> POST /login
 Done-> POST /logout
 
-user:
+User:
     -> GET /user/feed
-    -> GET /user/connection
+Done-> GET /user/connection
     -> GET /user/requests
 
-profile:
+Profile:
 Done-> GET /profile/view
-    -> PATCH /profile/edit
-    -> POST /profile/password
+Done-> PATCH /profile/edit
+Done-> POST /profile/password
 
-request:
-    -> POST /request/send/interested/:userId
-    -> POST /request/send/ignored/:userId
-    -> POST /request/review/accepted/:requestId
-    -> POST /request/review/rejected/:requestId
-
-    
-
+Request:
+Done-> POST /request/send/:status/:userid
+        -> POST /request/send/interested/:userId
+        -> POST /request/send/ignored/:userId
+Done-> POST /request/review/:status/:requestid
+        -> POST /request/review/accepted/:requestId
+        -> POST /request/review/rejected/:requestId
+        
 
 
 Thought Process for Creating API:
-
 POST /profile/edit/password:
     -> Check Auth
     -> Get the Id from body.user and the current password
