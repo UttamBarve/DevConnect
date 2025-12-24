@@ -5,7 +5,9 @@ const {
   editProfileSentisation,
   passwordValidation,
 } = require("../utils/validation");
+const Otp = require("../models/otp");
 const profileRouter = Router();
+const bcrypt = require("bcrypt");
 
 //Profile API : Get Profile
 profileRouter.get("/api/v0/profile/view", userAuth, (req, res) => {
@@ -74,19 +76,22 @@ profileRouter.post(
     try {
       const email = req.body.email;
       const user = await User.findOne({ email: email });
-      
+
       if (!user) {
         throw new Error("User Not Exists!");
       }
 
-      const otp = Math.floor(100000 + Math.random() * 900000);
+      const otp = String(Math.floor(100000 + Math.random() * 900000));
       const otpExpiry = new Date(Date.now() + 5 * 60 * 1000);
 
-      user.otp = otp;
-      user.otpExpiry = otpExpiry;
+      const newHashedOTP = await bcrypt.hash(otp, 10);
 
-      user.save();
-
+      await Otp.findOneAndUpdate(
+        { userId: user._id },
+        { otp: newHashedOTP, otpExpiry: otpExpiry },
+        { upsert: true }
+      );
+      // TODO: email service integration is remain
       res.send(
         "EMAIL: Your One Time Password is: " +
           otp +
@@ -98,39 +103,46 @@ profileRouter.post(
   }
 );
 
-profileRouter.patch("/api/v0/profile/forgotPassword/verifyOTP",
+profileRouter.patch(
+  "/api/v0/profile/forgotPassword/verifyOTP",
   async (req, res) => {
     try {
       const email = req.body.email;
-      const otpInput = req.body.otp;
+      const otpInput = String(req.body.otp);
       const newPassword = req.body.newPassword;
+
       const user = await User.findOne({ email: email });
+      if (!user) throw new Error("User not found");
+
+      const otpDoc = await Otp.findOne({ userId: user._id });
+      if (!otpDoc) throw new Error("OTP not found");
 
       if (!passwordValidation(newPassword)) {
         throw new Error("Please enter a Strong Password");
       }
 
-      const { otp, otpExpiry } = user;
+      const { otpExpiry } = otpDoc;
 
-      if (otp == null || otpExpiry == null) {
-        throw new Error("Enter Valid Data!");
+      if (!otpInput) {
+        throw new Error("OTP required");
       }
 
       if (otpExpiry < Date.now()) {
         throw new Error("OTP has Expired");
       }
 
-      if (otpInput != otp) {
+      const isValidate = await otpDoc.validateOTP(otpInput);
+
+      if (!isValidate) {
         throw new Error("Invalid OTP");
       }
 
       const newHashedPassword = await user.passwordEncryption(newPassword);
 
       user.password = newHashedPassword;
-      user.otp = null;
-      user.otpExpiry = null;
 
-      user.save();
+      await user.save();
+      await Otp.deleteOne({ userId: user._id });
 
       res.send("Password changed succefully!");
     } catch (err) {

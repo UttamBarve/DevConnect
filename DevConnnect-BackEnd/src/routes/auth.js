@@ -8,9 +8,7 @@ const {
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 const authRouter = Router();
-
 require("dotenv").config();
-
 
 
 // SignUp : Add user to DB
@@ -33,7 +31,7 @@ authRouter.post("/api/v0/signup", async (req, res) => {
     } = req.body;
 
     // Encrypt Password:
-    const encryptedPassword = await bcrypt.hash(password, 10);;
+    const encryptedPassword = await bcrypt.hash(password, 10);
 
     // Save User Data
     // creating user document
@@ -63,7 +61,6 @@ authRouter.post("/api/v0/signup", async (req, res) => {
     });
   }
 });
-
 
 //Login API : Authentication
 authRouter.post("/api/v0/login", async (req, res) => {
