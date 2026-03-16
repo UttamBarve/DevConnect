@@ -40,12 +40,6 @@ The platform is designed to make professional networking simple, interactive, an
 ### 🔐 Authentication  
 - JWT (JSON Web Token)  
 
-### 💬 Real-Time Communication  
-- Socket.io  
-
-### 💳 Payments  
-- Razorpay Integration  
-
 ---
 
 ## 🔥 How It Works  
