@@ -8,7 +8,7 @@
 ## 📌 Project Overview  
 
 **DevConnect** is a developer networking platform that helps programmers discover, connect, and collaborate with like-minded developers.  
-Users can explore developer profiles, interact using swipe-based actions, match based on mutual interest, and communicate in real time.
+Users can explore developer profiles, interact using swipe-based actions, match based on mutual interest.
 
 The platform is designed to make professional networking simple, interactive, and collaboration-focused.
 
@@ -18,10 +18,7 @@ The platform is designed to make professional networking simple, interactive, an
 
 ✅ Secure user authentication (Signup / Login)  
 ✅ Profile creation with skills, experience, bio, and profile photo  
-✅ Swipe-based interaction to like or ignore developer profiles  
-✅ Smart matching system based on mutual interest  
-✅ Real-time chat system for matched users  
-✅ Premium membership with payment integration  
+✅ Swipe-based interaction to like or ignore developer profiles    
 ✅ Fully responsive modern UI  
 
 ---
@@ -48,8 +45,6 @@ The platform is designed to make professional networking simple, interactive, an
 2. Browse developer profiles using swipe interaction.  
 3. Send connection requests to other developers.  
 4. If both users accept, a match is created.  
-5. Matched users can chat in real time.  
-6. Users can upgrade to premium membership.  
 
 ---
 
